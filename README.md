@@ -10,4 +10,4 @@ Z E N  S O C I E T Y
       \|   |   |/
    --------------------
    STATUS: OPERATIONAL
-   DISCORD: N3BvZ499sc
+   DISCORD: discord.gg/N3BvZ499sc
