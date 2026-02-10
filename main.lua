@@ -1,112 +1,147 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "🚩 ZenSociety | v1.0",
-   LoadingTitle = "Iniciando Protocolo de Extinción...",
-   LoadingSubtitle = "by ZenSociety Admin",
+   Name = "🚩 ZenSociety V2 | By ItsZenCs",
+   LoadingTitle = "ESTABLECIENDO DOMINIO TOTAL...",
+   LoadingSubtitle = "by itszencs | Society Ecosystem",
    ConfigurationSaving = {
       Enabled = true,
-      FolderName = "ZenSociety_Data",
-      FileName = "MainHacks"
+      FolderName = "ZenSociety_V2",
+      FileName = "Config"
    },
-   Theme = "Red" -- Esto configura los tonos rojos y negros
+   Theme = "Dark" -- Base oscura para resaltar los degradados rojos
 })
 
--- VARIABLES --
-local Player = game.Players.LocalPlayer
-local Character = Player.Character or Player.CharacterAdded:Wait()
+-- NOTA: Rayfield maneja los colores de los elementos automáticamente al elegir "Dark",
+-- pero aquí forzamos la estética de la Sociedad.
 
--- PESTAÑA INFO / DISCORD --
-local TabInfo = Window:CreateTab("🔗 Social", 4483362458)
-TabInfo:CreateSection("Únete a la Sociedad")
-TabInfo:CreateButton({
-   Name = "Copiar Link de Discord",
+-- WATERMARK (TEXTO EN PANTALLA)
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+local MainFrame = Instance.new("Frame", ScreenGui)
+MainFrame.Size = UDim2.new(0, 250, 0, 40)
+MainFrame.Position = UDim2.new(0, 10, 0, 10)
+MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MainFrame.BorderSizePixel = 2
+MainFrame.BorderColor3 = Color3.fromRGB(150, 0, 0)
+
+local UIGradient = Instance.new("UIGradient", MainFrame)
+UIGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(200, 0, 0)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(20, 0, 0))
+}
+
+local DiscordLabel = Instance.new("TextLabel", MainFrame)
+DiscordLabel.Size = UDim2.new(1, 0, 1, 0)
+DiscordLabel.BackgroundTransparency = 1
+DiscordLabel.Text = "ZenSociety | discord.gg/N3BvZ499sc"
+DiscordLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+DiscordLabel.Font = Enum.Font.Code
+DiscordLabel.TextSize = 13
+
+-- PESTAÑA: DESTRUCCIÓN TOTAL
+local TabDestruction = Window:CreateTab("☄️ Destroyer", 4483362458)
+
+TabDestruction:CreateButton({
+   Name = "METHOD: NULL-POINT CRASH",
    Callback = function()
-       setclipboard("https://discord.gg/N3BvZ499sc")
-       Rayfield:Notify({Title = "ZenSociety", Content = "¡Link copiado al portapapeles!", Duration = 5})
-   end,
-})
-
--- PESTAÑA CRASH (ATTACK) --
-local TabCrash = Window:CreateTab("🔥 Server Destroyer", 4483362458)
-TabCrash:CreateSection("⚠️ PELIGRO: Estas funciones pueden banearte")
-
-TabCrash:CreateButton({
-   Name = "MÉTODO: REMOTE OVERLOAD (LAG)",
-   Callback = function()
-       Rayfield:Notify({Title = "ZenSociety", Content = "Inyectando paquetes basura...", Duration = 3})
-       for i = 1, 1000 do
-           for _, v in pairs(game:GetDescendants()) do
-               if v:IsA("RemoteEvent") then
-                   v:FireServer(string.rep("ZenSociety_OWNED", 500))
+       Rayfield:Notify({Title = "ZENSOCIETY", Content = "Iniciando colapso de red...", Duration = 4})
+       -- Ejecución en paralelo para saturar el buffer del servidor
+       for i = 1, 15 do
+           task.spawn(function()
+               while true do
+                   for _, remote in pairs(game:GetDescendants()) do
+                       if remote:IsA("RemoteEvent") then
+                           remote:FireServer(string.rep("🛑ZENSOCIETY🛑", 1000))
+                       end
+                   end
+                   task.wait(0.001)
                end
-           end
-           task.wait(0.01)
+           end)
        end
    end,
 })
 
-TabCrash:CreateToggle({
-   Name = "PART SPAM (Destruir FPS)",
+-- PESTAÑA: TROLL & DUPE
+local TabTroll = Window:CreateTab("🤡 Troll & Dupe", 4483362458)
+
+TabTroll:CreateSection("Dupe Tools")
+TabTroll:CreateButton({
+   Name = "Ghost Dupe (Experimental)",
+   Callback = function()
+       -- Simula el lag para confundir al servidor durante el intercambio/drop
+       settings().Network.IncomingReplicationLag = 10
+       Rayfield:Notify({Title = "DUPE", Content = "Lag activo por 5s. Suelta el objeto.", Duration = 5})
+       task.wait(5)
+       settings().Network.IncomingReplicationLag = 0
+   end,
+})
+
+TabTroll:CreateSection("Troll Tools")
+TabTroll:CreateToggle({
+   Name = "Fling Aura (Lanza a la gente)",
    CurrentValue = false,
    Callback = function(Value)
-       _G.SpamParts = Value
-       while _G.SpamParts do
-           local p = Instance.new("Part", workspace)
-           p.Size = Vector3.new(20, 20, 20)
-           p.Position = Player.Character.HumanoidRootPart.Position + Vector3.new(0, 50, 0)
-           p.Velocity = Vector3.new(0, 1000, 0)
-           p.BrickColor = BrickColor.new("Really red")
-           task.wait()
+       _G.Fling = Value
+       while _G.Fling do
+           local p = game.Players.LocalPlayer.Character.HumanoidRootPart
+           p.Velocity = Vector3.new(0, 10000, 0) -- Crea una fuerza invisible de empuje
+           task.wait(0.1)
+           p.Velocity = Vector3.new(0, 0, 0)
+           task.wait(0.1)
        end
    end,
 })
 
--- PESTAÑA HACKS (COMBATE) --
-local TabHacks = Window:CreateTab("💀 Elite Hacks", 4483362458)
+-- PESTAÑA: MOVIMIENTO & HACKS
+local TabElite = Window:CreateTab("⚔️ Elite Hacks", 4483362458)
 
-TabHacks:CreateToggle({
-   Name = "Hitbox Expander (GOD)",
+TabElite:CreateSlider({
+   Name = "Zen Speed",
+   Range = {16, 500},
+   Increment = 5,
+   CurrentValue = 16,
+   Callback = function(Value)
+       game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+   end,
+})
+
+TabElite:CreateToggle({
+   Name = "Wallhack (ESP)",
    CurrentValue = false,
    Callback = function(Value)
-       _G.HitboxSize = 25
-       _G.HitboxEnabled = Value
-       game:GetService("RunService").RenderStepped:Connect(function()
-           if _G.HitboxEnabled then
-               for _, v in pairs(game.Players:GetPlayers()) do
-                   if v ~= Player and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-                       v.Character.HumanoidRootPart.Size = Vector3.new(_G.HitboxSize, _G.HitboxSize, _G.HitboxSize)
-                       v.Character.HumanoidRootPart.Transparency = 0.7
-                       v.Character.HumanoidRootPart.Color = Color3.fromRGB(255, 0, 0)
-                       v.Character.HumanoidRootPart.CanCollide = false
+       _G.ESP = Value
+       while _G.ESP do
+           for _, p in pairs(game.Players:GetPlayers()) do
+               if p ~= game.Players.LocalPlayer and p.Character then
+                   if not p.Character:FindFirstChild("Highlight") then
+                       local h = Instance.new("Highlight", p.Character)
+                       h.FillColor = Color3.fromRGB(255, 0, 0)
+                       h.OutlineColor = Color3.fromRGB(0, 0, 0)
                    end
                end
            end
-       end)
+           task.wait(1)
+       end
    end,
 })
 
--- PESTAÑA MOVIMIENTO --
-local TabMove = Window:CreateTab("⚡ Movimiento", 4483362458)
-TabMove:CreateSlider({
-   Name = "Speed Velocity",
-   Range = {16, 500},
-   Increment = 1,
-   CurrentValue = 16,
-   Callback = function(Value) Player.Character.Humanoid.WalkSpeed = Value end,
-})
-
-TabMove:CreateButton({
-   Name = "Infinite Jump",
-   Callback = function()
-       game:GetService("UserInputService").JumpRequest:Connect(function()
-           Player.Character:FindFirstChildOfClass('Humanoid'):ChangeState("Jumping")
-       end)
+-- PESTAÑA: ANUNCIOS
+local TabAds = Window:CreateTab("📢 Promo", 4483362458)
+TabAds:CreateToggle({
+   Name = "Auto-Chat Spammer",
+   CurrentValue = false,
+   Callback = function(Value)
+       _G.Spam = Value
+       while _G.Spam do
+           local msg = "🚩 ZenSociety V2 is HERE! discord.gg/N3BvZ499sc"
+           game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+           task.wait(8)
+       end
    end,
 })
 
 Rayfield:Notify({
-   Title = "ZenSociety Inyectado",
-   Content = "Servidor bajo control. Discord: N3BvZ499sc",
-   Duration = 7,
+   Title = "ZenSociety V2",
+   Content = "Bienvenido a la Sociedad. Panel cargado.",
+   Duration = 5
 })
