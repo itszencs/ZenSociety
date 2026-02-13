@@ -1,147 +1,262 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "🚩 ZenSociety V2 | By ItsZenCs",
-   LoadingTitle = "ESTABLECIENDO DOMINIO TOTAL...",
-   LoadingSubtitle = "by itszencs | Society Ecosystem",
-   ConfigurationSaving = {
-      Enabled = true,
-      FolderName = "ZenSociety_V2",
-      FileName = "Config"
-   },
-   Theme = "Dark" -- Base oscura para resaltar los degradados rojos
+    Name = "🚩 ZenSociety V2.1  —  TROLL MODE",
+    LoadingTitle = "ESTABLECIENDO DOMINIO TOTAL...",
+    LoadingSubtitle = "by itszencs | zSociety Ecosystem",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "ZenSociety_Troll",
+        FileName = "TrollConfig"
+    },
+    Theme = "Dark"
 })
 
--- NOTA: Rayfield maneja los colores de los elementos automáticamente al elegir "Dark",
--- pero aquí forzamos la estética de la Sociedad.
+-- ────────────────────────────────────────────────────────────────
+--                   WATERMARK / BANNER ROJO
+-- ────────────────────────────────────────────────────────────────
+local sg = Instance.new("ScreenGui", game.CoreGui)
+sg.ResetOnSpawn = false
 
--- WATERMARK (TEXTO EN PANTALLA)
-local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
-local MainFrame = Instance.new("Frame", ScreenGui)
-MainFrame.Size = UDim2.new(0, 250, 0, 40)
-MainFrame.Position = UDim2.new(0, 10, 0, 10)
-MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-MainFrame.BorderSizePixel = 2
-MainFrame.BorderColor3 = Color3.fromRGB(150, 0, 0)
+local frame = Instance.new("Frame", sg)
+frame.Size = UDim2.new(0, 320, 0, 38)
+frame.Position = UDim2.new(0.5, -160, 0, 8)
+frame.BackgroundColor3 = Color3.new(0,0,0)
+frame.BorderSizePixel = 2
+frame.BorderColor3 = Color3.fromRGB(180,0,0)
 
-local UIGradient = Instance.new("UIGradient", MainFrame)
-UIGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(200, 0, 0)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(20, 0, 0))
+local grad = Instance.new("UIGradient", frame)
+grad.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(220,20,60)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(139,0,0)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(40,0,0))
 }
 
-local DiscordLabel = Instance.new("TextLabel", MainFrame)
-DiscordLabel.Size = UDim2.new(1, 0, 1, 0)
-DiscordLabel.BackgroundTransparency = 1
-DiscordLabel.Text = "ZenSociety | discord.gg/N3BvZ499sc"
-DiscordLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-DiscordLabel.Font = Enum.Font.Code
-DiscordLabel.TextSize = 13
+local txt = Instance.new("TextLabel", frame)
+txt.Size = UDim2.new(1,0,1,0)
+txt.BackgroundTransparency = 1
+txt.Text = "🚩 ZenSociety V2.1  •  discord.gg/N3BvZ499sc  •  TROLL & SHAME"
+txt.TextColor3 = Color3.new(1,1,1)
+txt.Font = Enum.Font.Code
+txt.TextSize = 14
+txt.TextStrokeTransparency = 0.7
+txt.TextStrokeColor3 = Color3.fromRGB(80,0,0)
 
--- PESTAÑA: DESTRUCCIÓN TOTAL
-local TabDestruction = Window:CreateTab("☄️ Destroyer", 4483362458)
+-- ────────────────────────────────────────────────────────────────
+--                         TABS
+-- ────────────────────────────────────────────────────────────────
 
-TabDestruction:CreateButton({
-   Name = "METHOD: NULL-POINT CRASH",
-   Callback = function()
-       Rayfield:Notify({Title = "ZENSOCIETY", Content = "Iniciando colapso de red...", Duration = 4})
-       -- Ejecución en paralelo para saturar el buffer del servidor
-       for i = 1, 15 do
-           task.spawn(function()
-               while true do
-                   for _, remote in pairs(game:GetDescendants()) do
-                       if remote:IsA("RemoteEvent") then
-                           remote:FireServer(string.rep("🛑ZENSOCIETY🛑", 1000))
-                       end
-                   end
-                   task.wait(0.001)
-               end
-           end)
-       end
-   end,
+local TrollTab   = Window:CreateTab("🤡 TROLL", 4483362458)
+local VisualTab  = Window:CreateTab("👁️ Visual Shit", 4483362458)
+local Movement   = Window:CreateTab("⚡ Movement", 4483362458)
+local SpamTab    = Window:CreateTab("📢 Spam & Shame", 4483362458)
+local AudioTab   = Window:CreateTab("🔊 Audio Cancer", 4483362458)
+
+-- ────────────────────────────────────────────────────────────────
+--                       TROLL TAB
+-- ────────────────────────────────────────────────────────────────
+
+TrollTab:CreateSection("Classic Trolls")
+
+TrollTab:CreateButton({
+    Name = "Hacete gigante x10",
+    Callback = function()
+        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        hrp.Size = Vector3.new(30,30,30)
+        hrp.Transparency = 0.4
+        game:GetService("Debris"):AddItem(hrp, 6)
+    end
 })
 
--- PESTAÑA: TROLL & DUPE
-local TabTroll = Window:CreateTab("🤡 Troll & Dupe", 4483362458)
-
-TabTroll:CreateSection("Dupe Tools")
-TabTroll:CreateButton({
-   Name = "Ghost Dupe (Experimental)",
-   Callback = function()
-       -- Simula el lag para confundir al servidor durante el intercambio/drop
-       settings().Network.IncomingReplicationLag = 10
-       Rayfield:Notify({Title = "DUPE", Content = "Lag activo por 5s. Suelta el objeto.", Duration = 5})
-       task.wait(5)
-       settings().Network.IncomingReplicationLag = 0
-   end,
+TrollTab:CreateButton({
+    Name = "Hacete chiquitito (rata mode)",
+    Callback = function()
+        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        hrp.Size = Vector3.new(0.4, 0.4, 0.4)
+        hrp.Transparency = 0.3
+        game:GetService("Debris"):AddItem(hrp, 7)
+    end
 })
 
-TabTroll:CreateSection("Troll Tools")
-TabTroll:CreateToggle({
-   Name = "Fling Aura (Lanza a la gente)",
-   CurrentValue = false,
-   Callback = function(Value)
-       _G.Fling = Value
-       while _G.Fling do
-           local p = game.Players.LocalPlayer.Character.HumanoidRootPart
-           p.Velocity = Vector3.new(0, 10000, 0) -- Crea una fuerza invisible de empuje
-           task.wait(0.1)
-           p.Velocity = Vector3.new(0, 0, 0)
-           task.wait(0.1)
-       end
-   end,
+TrollTab:CreateToggle({
+    Name = "Fling Aura (te lanzás vos solo)",
+    CurrentValue = false,
+    Callback = function(v)
+        _G.FlingAura = v
+        spawn(function()
+            while _G.FlingAura do
+                pcall(function()
+                    local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    hrp.Velocity = Vector3.new(math.random(-200,200), 150+math.random(0,300), math.random(-200,200))
+                end)
+                task.wait(0.12)
+            end
+        end)
+    end
 })
 
--- PESTAÑA: MOVIMIENTO & HACKS
-local TabElite = Window:CreateTab("⚔️ Elite Hacks", 4483362458)
-
-TabElite:CreateSlider({
-   Name = "Zen Speed",
-   Range = {16, 500},
-   Increment = 5,
-   CurrentValue = 16,
-   Callback = function(Value)
-       game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
-   end,
+TrollTab:CreateButton({
+    Name = "Rainbow Name (si el juego lo permite)",
+    Callback = function()
+        spawn(function()
+            local name = game.Players.LocalPlayer.Name
+            for i = 1, 50 do
+                game.Players.LocalPlayer.Character.Head:FindFirstChildOfClass("BillboardGui").Adornee.TextLabel.TextColor3 = Color3.fromHSV(i/50,1,1)
+                task.wait(0.08)
+            end
+        end)
+    end
 })
 
-TabElite:CreateToggle({
-   Name = "Wallhack (ESP)",
-   CurrentValue = false,
-   Callback = function(Value)
-       _G.ESP = Value
-       while _G.ESP do
-           for _, p in pairs(game.Players:GetPlayers()) do
-               if p ~= game.Players.LocalPlayer and p.Character then
-                   if not p.Character:FindFirstChild("Highlight") then
-                       local h = Instance.new("Highlight", p.Character)
-                       h.FillColor = Color3.fromRGB(255, 0, 0)
-                       h.OutlineColor = Color3.fromRGB(0, 0, 0)
-                   end
-               end
-           end
-           task.wait(1)
-       end
-   end,
+-- ────────────────────────────────────────────────────────────────
+--                       VISUAL SHIT
+-- ────────────────────────────────────────────────────────────────
+
+VisualTab:CreateSection("Visual Cancer")
+
+VisualTab:CreateToggle({
+    Name = "ESP rojo brillante (todos)",
+    CurrentValue = false,
+    Callback = function(v)
+        _G.ESP = v
+        while _G.ESP do
+            for _, plr in pairs(game.Players:GetPlayers()) do
+                if plr ~= game.Players.LocalPlayer and plr.Character then
+                    local char = plr.Character
+                    if not char:FindFirstChild("ESPHighlight") then
+                        local hl = Instance.new("Highlight", char)
+                        hl.Name = "ESPHighlight"
+                        hl.FillColor = Color3.fromRGB(255,40,40)
+                        hl.OutlineColor = Color3.fromRGB(255,200,0)
+                        hl.FillTransparency = 0.4
+                        hl.OutlineTransparency = 0
+                    end
+                end
+            end
+            task.wait(1.2)
+        end
+    end
 })
 
--- PESTAÑA: ANUNCIOS
-local TabAds = Window:CreateTab("📢 Promo", 4483362458)
-TabAds:CreateToggle({
-   Name = "Auto-Chat Spammer",
-   CurrentValue = false,
-   Callback = function(Value)
-       _G.Spam = Value
-       while _G.Spam do
-           local msg = "🚩 ZenSociety V2 is HERE! discord.gg/N3BvZ499sc"
-           game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
-           task.wait(8)
-       end
-   end,
+VisualTab:CreateToggle({
+    Name = "Force Field arcoíris (vos)",
+    CurrentValue = false,
+    Callback = function(v)
+        _G.RainbowFF = v
+        spawn(function()
+            local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+            local ff = Instance.new("ForceField", char)
+            while _G.RainbowFF and ff.Parent do
+                ff.Visible = true
+                for i = 0, 1, 0.03 do
+                    ff.Color3 = Color3.fromHSV(i,1,1)
+                    task.wait(0.03)
+                end
+            end
+            if ff then ff:Destroy() end
+        end)
+    end
+})
+
+-- ────────────────────────────────────────────────────────────────
+--                       MOVEMENT
+-- ────────────────────────────────────────────────────────────────
+
+Movement:CreateSlider({
+    Name = "WalkSpeed (16 → 350)",
+    Range = {16, 350},
+    Increment = 8,
+    CurrentValue = 16,
+    Callback = function(v)
+        local h = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+        if h then h.WalkSpeed = v end
+    end
+})
+
+Movement:CreateSlider({
+    Name = "JumpPower (50 → 300)",
+    Range = {50, 300},
+    Increment = 10,
+    CurrentValue = 50,
+    Callback = function(v)
+        local h = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+        if h then h.JumpPower = v end
+    end
+})
+
+-- ────────────────────────────────────────────────────────────────
+--                       SPAM & SHAME
+-- ────────────────────────────────────────────────────────────────
+
+SpamTab:CreateToggle({
+    Name = "Auto Spam Chat (cada 6s)",
+    CurrentValue = false,
+    Callback = function(v)
+        _G.ChatSpam = v
+        spawn(function()
+            while _G.ChatSpam do
+                local msgs = {
+                    "🚩 zSociety ownz u  •  discord.gg/N3BvZ499sc",
+                    "get rekt kiddo 😈",
+                    "imagine being this bad 😂",
+                    "zSociety > your whole bloodline",
+                    "cry more in chat lil bro"
+                }
+                local msg = msgs[math.random(1,#msgs)]
+                pcall(function()
+                    game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents",true).SayMessageRequest:FireServer(msg, "All")
+                end)
+                task.wait(6)
+            end
+        end)
+    end
+})
+
+-- ────────────────────────────────────────────────────────────────
+--                       AUDIO CANCER
+-- ────────────────────────────────────────────────────────────────
+
+AudioTab:CreateButton({
+    Name = "Spam Sound Id (toca varias veces = caos)",
+    Callback = function()
+        for i = 1, 8 do
+            spawn(function()
+                local snd = Instance.new("Sound")
+                snd.SoundId = "rbxassetid://1847661825"   -- ejemplo (podes cambiarlo)
+                snd.Volume = 10
+                snd.Looped = false
+                snd.Parent = game.Players.LocalPlayer.PlayerGui
+                snd:Play()
+                snd.Ended:Wait()
+                snd:Destroy()
+            end)
+        end
+    end
+})
+
+AudioTab:CreateToggle({
+    Name = "Loop Sound Cancer (muy molesto)",
+    CurrentValue = false,
+    Callback = function(v)
+        if v then
+            local snd = Instance.new("Sound", game.Players.LocalPlayer.PlayerGui)
+            snd.SoundId = "rbxassetid://1847661825"   -- cámbialo por el id que quieras
+            snd.Volume = 6
+            snd.Looped = true
+            snd:Play()
+            _G.CancerSound = snd
+        else
+            if _G.CancerSound then
+                _G.CancerSound:Stop()
+                _G.CancerSound:Destroy()
+            end
+        end
+    end
 })
 
 Rayfield:Notify({
-   Title = "ZenSociety V2",
-   Content = "Bienvenido a la Sociedad. Panel cargado.",
-   Duration = 5
-})
+    Title = "zSociety V2.1 - TROLL MODE",
+    Content = "Panel cargado. A romperle la cabeza a todos (sin crashear pls 😈)",
+    Duration = 6
